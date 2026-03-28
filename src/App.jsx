@@ -15,15 +15,23 @@ import {
   Search, Bell, Menu
 } from 'lucide-react';
 
-// إعدادات Firebase
-const firebaseConfig = JSON.parse(__firebase_config);
+
+const firebaseConfig = {
+  apiKey: "ضع_هنا_API_KEY", 
+  authDomain: "gess-edu.firebaseapp.com",
+  projectId: "gess-edu",
+  storageBucket: "gess-edu.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
+};
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'gess-edu-platform';
+const appId = 'gess-edu-platform';
 
-// الشعار (بناءً على الصور المرفقة)
-const GESS_LOGO = "https://images.unsplash.com/photo-1592595825556-980b5ca76a07?q=80&w=200&auto=format&fit=crop"; // استبدله برابط شعار GESS الحقيقي
+// الشعار (تم تحديثه بناءً على الصورة التي أرسلتها)
+const GESS_LOGO = "https://i.ibb.co/L6V2M7Q/GESS-Logo.png";
 
 export default function App() {
   const [user, setUser] = useState(null);
