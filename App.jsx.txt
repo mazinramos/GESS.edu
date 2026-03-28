@@ -4,7 +4,7 @@ import {
   getFirestore, collection, addDoc, onSnapshot, 
   deleteDoc, doc, query, orderBy 
 } from 'firebase/firestore';
-import { 
+import {  
   getAuth, signInAnonymously, onAuthStateChanged 
 } from 'firebase/auth';
 import { 
