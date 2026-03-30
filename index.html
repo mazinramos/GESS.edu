@@ -1,16 +1,392 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/L6V2M7Q/GESS-Logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GESS EDU PLATFORM</title>
-    <!-- تضمين Tailwind CSS مباشرة للسرعة -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="IH_dYUXH_BQW7TR7uUDlCoLQvJy0kQdNy503aXl8W8w" />
+    <meta name="description" content="منصة GESS EDU توفر محاضرات PDF، . طلاب جامعه الخرطوم . جامعة الخرطوم هندسة جامغة الخرطوم , هندسة المساحة . طلاب هندسة المساحة جامعة الخرطوم . فيديوهات، امتحانات ومراجع لطلاب الهندسة لجميع السمسترات.">
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7IniYMpJnIFr7Ae9kIYO_3tk0o1KSI2MTg&s" />
+    <link rel="apple-touch-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7IniYMpJnIFr7Ae9kIYO_3tk0o1KSI2MTg&s" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22GESS%20EDU%22,%22short_name%22:%22GESS%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22icons%22:[{%22src%22:%22https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7IniYMpJnIFr7Ae9kIYO_3tk0o1KSI2MTg&s%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}" />
+    <title>GESS EDU | منصة المواد الهندسية والكمبيوتر</title>
+    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
+    <script>tailwind.config = {darkMode: 'class',}</script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Tajawal', sans-serif; }
+        .backdrop-blur-xl { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .animate-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-[#fafafa]">
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+     
+        const firebaseConfig = {
+            apiKey: "ضع_هنا_API_KEY_الخاص_بك", 
+            authDomain: "gess-edu.firebaseapp.com",
+            projectId: "gess-edu",
+            storageBucket: "gess-edu.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
+
+       
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const appId = 'gess-edu-platform';
+
+        window.fb = { db, auth, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy, signInAnonymously, onAuthStateChanged, appId };
+    </script>
+
+    <script type="text/babel">
+        const { 
+            BookOpen, Video, FileText, FileQuestion, Plus, Trash2, LogOut, 
+            ChevronLeft, GraduationCap, FolderOpen, User, Lock, Settings, 
+            LayoutDashboard, X, ShieldCheck, Search, Bell, Menu 
+        } = lucide;
+
+        const GESS_LOGO = "data:image/jpeg;base64,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";
+
+        function App() {
+            const [user, setUser] = React.useState(null);
+            const [studentName, setStudentName] = React.useState("");
+            const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+            const [view, setView] = React.useState('login'); 
+            const [showAdminAuth, setShowAdminAuth] = React.useState(false);
+            const [adminPassInput, setAdminPassInput] = React.useState("");
+            const [path, setPath] = React.useState([]);
+            const [contents, setContents] = React.useState([]);
+            const [selectedItem, setSelectedItem] = React.useState(null);
+            const [darkMode, setDarkMode] = React.useState(localStorage.getItem("gess_theme") === "dark");
+            const [toast, setToast] = React.useState({ show: false, message: '' });
+            
+  React.useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem("gess_theme", "dark");
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem("gess_theme", "light");
+    }
+  }, [darkMode]);  
+            const years = [1, 2, 3, 4, 5].map(y => ({ id: y, title: `السنة ${y === 1 ? 'الأولى' : y === 2 ? 'الثانية' : y === 3 ? 'الثالثة' : y === 4 ? 'الرابعة' : 'الخامسة'}` }));
+            const semesters = [{ id: 1, title: 'السمستر الأول' }, { id: 2, title: 'السمستر الثاني' }];
+
+            React.useEffect(() => {
+                const { auth, db, signInAnonymously, onAuthStateChanged, query, collection, onSnapshot, appId } = window.fb;
+                
+                signInAnonymously(auth).catch(err => console.error("Auth Error:", err));
+                onAuthStateChanged(auth, setUser);
+
+                const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'materials'));
+                const unsubscribe = onSnapshot(q, (snapshot) => {
+                    setContents(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                });
+                return () => unsubscribe();
+            }, []);
+
+  React.useEffect(() => {
+    const handleBackButton = (e) => {
+      if (view !== 'login') {
+        e.preventDefault();
+        if (selectedItem) {
+          setSelectedItem(null);
+        } else if (path.length > 0) {
+          setPath(path.slice(0, -1));
+        } else if (view === 'admin') {
+          setView('student');
+        }
+        window.history.pushState(null, null, window.location.pathname);
+      }
+    };
+
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener('popstate', handleBackButton);
+    return () => window.removeEventListener('popstate', handleBackButton);
+  }, [view, path, selectedItem]);
+
+          
+            React.useEffect(() => { lucide.createIcons(); });
+
+           const handleLogin = (e) => {
+    e.preventDefault();
+    if (e.target.password.value === "Gess@123") {
+      const name = e.target.name.value;
+      setStudentName(name);
+     
+      localStorage.setItem("gess_user_name", name); 
+      setIsLoggedIn(true);
+      setView('student');
+       setToast({ show: true, message: `أهلاً بك يا ${name} في منصة GESS EDU` });
+        setTimeout(() => setToast({ show: false, message: '' }), 3000);
+    } else {
+      setToast({ show: true, message: "⚠️ عذراً، كلمة المرور غير صحيحة" });
+setTimeout(() => setToast({ show: false, message: '' }), 3000);
+    }
+  };
+    
+React.useEffect(() => {
+  const handlePopState = (event) => {
+    if (view === 'admin') {
+      event.preventDefault();
+      setView('student');
+      window.history.pushState(null, null, window.location.pathname); 
+    } 
+    else if (path.length > 0) {
+      event.preventDefault();
+      setPath(prev => prev.slice(0, -1));
+      window.history.pushState(null, null, window.location.pathname); 
+    }
+  };
+  window.history.pushState(null, null, window.location.pathname);
+  window.addEventListener('popstate', handlePopState);
+  return () => {
+    window.removeEventListener('popstate', handlePopState);
+  };
+}, [path, view]);
+            
+            const checkAdminAuth = (e) => {
+                e.preventDefault();
+                if (adminPassInput === "Gess@123") {
+                    setView('admin');
+                    setShowAdminAuth(false);
+                    setAdminPassInput("");
+                    setPath([]);
+                } else {
+                   setToast({ show: true, message: "🚫 خطأ: كلمة مرور الإدارة غير صحيحة" });
+                    setTimeout(() => setToast({ show: false, message: '' }), 3000);
+                }
+            };
+
+            const addMaterial = async (e) => {
+                e.preventDefault();
+                const { db, collection, addDoc, appId } = window.fb;
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'materials'), {
+                    ...data,
+                    yearId: parseInt(data.yearId),
+                    semesterId: parseInt(data.semesterId),
+                    createdAt: new Date().toISOString()
+                });
+                e.target.reset();
+                alert("تمت إضافة المادة بنجاح!");
+            };
+
+            if (view === 'login') return (
+                <div className={`min-h-screen relative flex items-center justify-center p-4 overflow-hidden transition-colors duration-500 ${darkMode ? 'bg-gray-900' : ''}`}>
+                    <div className="absolute inset-0 z-0">
+                       <div className={`absolute inset-0 transition-colors duration-500 ${darkMode ? 'bg-black/60' : 'bg-[#f58220]/10'} mix-blend-multiply z-10`}></div>
+                        <img src="https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?q=80&w=1600" className="w-full h-full object-cover blur-md scale-110" />
+                    </div>
+                    <div className={`relative z-20 transition-all duration-500 p-8 rounded-[2.5rem] shadow-2xl w-full max-w-md border backdrop-blur-xl ${darkMode ? 'bg-gray-800/90 border-gray-700' : 'bg-white/80 border-white/50'}`}>
+                        <div className="flex flex-col items-center mb-8">
+                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg p-2 mb-4 border-2 border-[#f58220]">
+                                <img src={GESS_LOGO} className="w-full h-full object-contain rounded-full" />
+                            </div>
+                            <h1 className={`text-2xl font-black transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>GESS EDU PLATFORM</h1>
+                            <p className="text-[#f58220] font-bold text-sm tracking-widest mt-1">هندسة المساحة - جامعة الخرطوم</p>
+                        </div>
+                        <form onSubmit={handleLogin} className="space-y-5">
+                            <div className="relative group">
+                                <i data-lucide="user" className="absolute right-4 top-4 text-gray-400 group-focus-within:text-[#f58220]"></i>
+                                <input name="name" required placeholder="اسم المستخدم" className="w-full pr-12 p-4 bg-white border-2 border-transparent focus:border-[#f58220] rounded-2xl outline-none font-bold shadow-inner" />
+                            </div>
+                            <div className="relative group">
+                                <i data-lucide="lock" className="absolute right-4 top-4 text-gray-400 group-focus-within:text-[#f58220]"></i>
+                                <input name="password" type="password" required placeholder="كلمة المرور" className="w-full pr-12 p-4 bg-white border-2 border-transparent focus:border-[#f58220] rounded-2xl outline-none font-bold shadow-inner" />
+                            </div>
+                            <button className="w-full bg-[#f58220] text-white p-4 rounded-2xl font-black shadow-lg shadow-[#f58220]/30 hover:bg-[#d96e1a] transition-all">دخول للمنصة</button>
+                        </form>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className={`min-h-screen pb-20 transition-colors duration-500 ${darkMode ? 'bg-gray-900 text-white' : 'bg-[#fafafa]'}`}>
+                    {showAdminAuth && (
+                        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+                            <div className={`p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm border transition-all ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-100'}`}>
+                                <div className="flex justify-between items-center mb-6">
+                                    <h3 className="font-black text-[#f58220] flex items-center gap-2"><i data-lucide="shield-check"></i> الإدارة فقط</h3>
+                                    <button onClick={() => setShowAdminAuth(false)} className="p-2 hover:bg-gray-100 rounded-full"><i data-lucide="x"></i></button>
+                                </div>
+                                <form onSubmit={checkAdminAuth} className="space-y-4">
+                                    <p className="text-xs text-gray-500 font-bold">يرجى إدخال كلمة المرور الخاصة بالمشرف.</p>
+                                    <input type="password" autoFocus className="w-full p-4 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#f58220] outline-none font-bold text-center" value={adminPassInput} onChange={(e) => setAdminPassInput(e.target.value)} />
+                                    <button className="w-full bg-gray-900 text-white p-4 rounded-2xl font-black">تأكيد الهوية</button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+
+                   <header className={`sticky top-0 z-50 border-b h-20 flex items-center transition-all ${darkMode ? 'bg-gray-800 border-gray-700 shadow-xl' : 'bg-white border-gray-100 shadow-sm'}`}>
+                        <div className="max-w-6xl mx-auto px-4 w-full flex items-center justify-between">
+                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => {setView('student'); setPath([]); setSelectedItem(null);}}>
+                               <div className={`w-12 h-12 border rounded-lg p-1 transition-all ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'}`}>
+                                    <img src={GESS_LOGO} className="w-full h-full object-contain" />
+                                </div>
+                                <div>
+                                    <h1 className={`text-lg font-black leading-none transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>GESS EDU</h1>
+                                    <p className="text-[10px] text-[#f58220] font-bold mt-1">نحو آفاق هندسية أوسع</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                               <div className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${darkMode ? 'bg-gray-700 text-yellow-400' : 'bg-[#f58220]/5 text-[#f58220]'}`}>
+                                    <i data-lucide="user" class="w-4 h-4"></i>
+                                    <span className="text-sm font-black italic">{studentName}</span>
+                                </div>
+                                <div className={`flex gap-1 p-1 rounded-xl transition-colors ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
+                                    <button onClick={() => view === 'admin' ? setView('student') : setShowAdminAuth(true)} className={`p-3 rounded-lg ${view === 'admin' ? 'bg-[#f58220] text-white' : 'text-gray-400'}`}><i data-lucide="settings"></i></button>
+                                  <button onClick={() => setDarkMode(!darkMode)} className={`p-2 rounded-lg transition-all ${darkMode ? 'bg-gray-600 text-yellow-400' : 'bg-gray-100 text-gray-600'}`}><i data-lucide={darkMode ? "sun" : "moon"} className="w-4 h-4"></i></button>
+                                    <button onClick={() => {localStorage.removeItem("gess_user_name"); window.location.reload(); }} className="p-3 text-red-400"> <i data-lucide="log-out"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className={`max-w-6xl mx-auto px-4 py-8 transition-colors ${darkMode ? 'text-white' : ''}`}>
+                        {view === 'admin' ? (
+                            <div className="max-w-4xl mx-auto animate-in">
+                                <div className={`p-8 rounded-[2.5rem] shadow-sm border transition-all ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-100 mb-8'}`}>
+                                   <h2 className={`text-xl font-black mb-6 border-b pb-4 flex items-center gap-2 ${darkMode ? 'border-gray-700 text-white' : 'border-gray-100 text-gray-800'}`}><i data-lucide="layout-dashboard"></i> إضافة مادة</h2> 
+                                    <form onSubmit={addMaterial} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                        <input name="subject" required placeholder="اسم المادة" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`} />
+                                        <input name="title" required placeholder="عنوان الدرس" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`} />
+                                        <input name="url" required placeholder="الرابط المباشر" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`} />
+                                        <select name="yearId" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`}>
+                                            {years.map(y => <option key={y.id} value={y.id}>{y.title}</option>)}
+                                        </select>
+                                        <select name="semesterId" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`}>
+                                            {semesters.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
+                                        </select>
+                                        <select name="type" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`}>
+                                            <option value="video">محاضرة فيديو</option>
+                                            <option value="pdf">ملف ملخص</option>
+                                        </select>
+                                        <button className="md:col-span-3 bg-[#f58220] text-white p-5 rounded-2xl font-black">نشر المحتوى</button>
+                                    </form>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className={`animate-in transition-colors ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                {(path.length > 0 || selectedItem) && (
+                                    <button onClick={() => selectedItem ? setSelectedItem(null) : setPath(path.slice(0, -1))} className="mb-8 flex items-center gap-2 text-[#f58220] font-black bg-white px-6 py-3 rounded-2xl shadow-sm border border-gray-50">
+                                        <i data-lucide="chevron-left" class="rotate-180"></i> رجوع
+                                    </button>
+                                )}
+
+                                {path.length === 0 && !selectedItem && (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        {years.map(y => (
+                                           <button key={y.id} onClick={() => setPath([{type: 'year', ...y}])} className={`p-8 rounded-[2.5rem] border transition-all duration-300 flex flex-col items-center group ${darkMode ? 'bg-gray-800 border-gray-700 shadow-2xl' : 'bg-white border-gray-100 shadow-sm hover:shadow-md'}`}>
+                                                <i data-lucide="graduation-cap" class="w-12 h-12 text-[#f58220] mb-4"></i>
+                                               <h3 className={`text-2xl font-black transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>{y.title}</h3>
+                                                <p className="text-gray-400 text-sm mt-2">عرض المواد الدراسية</p>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {path.length === 1 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                                        {semesters.map(s => (
+                                            <button key={s.id} onClick={() => setPath([...path, {type: 'semester', ...s}])} className={`p-8 rounded-[2.5rem] border transition-all duration-300 flex flex-col items-center group ${darkMode ? 'bg-gray-800 border-gray-700 shadow-2xl' : 'bg-white border-gray-100 shadow-sm hover:shadow-md'}`}>
+                                                <i data-lucide="book-open" class="w-16 h-16 text-[#f58220] mx-auto mb-4"></i>
+                                                <h3 className={`text-3xl font-black transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>{s.title}</h3>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {path.length === 2 && (
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        {Array.from(new Set(contents.filter(c => c.yearId === path[0].id && c.semesterId === path[1].id).map(c => c.subject))).map(sub => (
+                                            <button key={sub} onClick={() => setPath([...path, {type: 'subject', title: sub}])} className="bg-white p-8 rounded-[2rem] border hover:bg-[#f58220]/5 text-center">
+                                                <i data-lucide="folder-open" class="w-10 h-10 text-[#f58220] mx-auto mb-2"></i>
+                                                <span className="font-black text-gray-700">{sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {path.length === 3 && !selectedItem && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        {contents.filter(c => c.yearId === path[0].id && c.semesterId === path[1].id && c.subject === path[2].title).map(item => (
+                                            <button key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-[2rem] border flex items-center justify-between hover:shadow-lg transition-all text-right">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={`p-4 rounded-xl ${item.type === 'video' ? 'bg-red-50 text-red-500' : 'bg-indigo-50 text-indigo-500'}`}>
+                                                        {item.type === 'video' ? <i data-lucide="video"></i> : <i data-lucide="file-text"></i>}
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-black text-lg">{item.title}</h4>
+                                                        <p className="text-[10px] font-bold text-gray-400 italic uppercase">{item.type}</p>
+                                                    </div>
+                                                </div>
+                                                <i data-lucide="chevron-left" class="text-gray-300"></i>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {selectedItem && (
+                                    <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden animate-in">
+                                        <div className="p-4 bg-gray-50 flex items-center justify-between">
+                                            <span className="text-xs font-black text-gray-500">{selectedItem.subject}</span>
+                                            <button onClick={() => setSelectedItem(null)} className="p-2 bg-white rounded-full"><i data-lucide="x"></i></button>
+                                        </div>
+                                        {selectedItem.type === 'video' ? (
+                                            <div className="aspect-video bg-black">
+                                                <iframe src={selectedItem.url.replace("watch?v=", "embed/")} className="w-full h-full border-none" allowFullScreen></iframe>
+                                            </div>
+                                        ) : (
+                                            <div className="py-20 text-center bg-gradient-to-br from-[#f58220]/5 to-transparent">
+                                                <i data-lucide="file-text" class="w-20 h-20 text-[#f58220]/20 mx-auto mb-6"></i>
+                                                <h3 className="text-2xl font-black mb-10">{selectedItem.title}</h3>
+                                                <a href={selectedItem.url} target="_blank" className="bg-[#f58220] text-white px-10 py-4 rounded-full font-black shadow-xl">تحميل / فتح الملف</a>
+                                            </div>
+                                        )}
+                                        <div className="p-10">
+                                            <h2 className="text-3xl font-black text-gray-900">{selectedItem.title}</h2>
+                                            <p className="mt-4 text-gray-500 font-medium">تم رفع هذا المحتوى بواسطة قسم هندسة المساحة لخدمة الطلاب أكاديمياً.</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </main>
+                    <footer className="fixed bottom-0 left-0 right-0 h-10 bg-white/50 backdrop-blur-md border-t flex items-center justify-center">
+                        <p className="text-[10px] font-black text-gray-400">GESS • UNIVERSITY OF KHARTOUM • GEOMATICS ENGINEERING</p>
+                    </footer>
+                    {toast.show && (
+  <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] animate-bounce">
+    <div className="bg-gray-800 text-white px-6 py-3 rounded-2xl shadow-2xl border border-gray-700 flex items-center gap-3">
+      <div className="w-2 h-2 rounded-full bg-[#f58220]"></div>
+      <span className="font-bold text-sm">{toast.message}</span>
+    </div>
+  </div>
+)}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
