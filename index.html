@@ -1,16 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="IH_dYUXH_BQW7TR7uUDlCoLQvJy0kQdNy503aXl8W8w" />
-    <meta name="description" content="منصة GESS EDU توفر محاضرات PDF، . طلاب جامعه الخرطوم . جامعة الخرطوم هندسة جامغة الخرطوم , هندسة المساحة . طلاب هندسة المساحة جامعة الخرطوم . فيديوهات، امتحانات ومراجع لطلاب الهندسة لجميع السمسترات.">
+    <meta name="description" content="منصة GESS EDU توفر محاضرات PDF، . طلاب جامعه الخرطوم . جامعة الخرطوم, هندسة جامعة الخرطوم ,gess ,هندسة المساحة . طلاب هندسة المساحة جامعة الخرطوم . فيديوهات،, Gess Edu, gess sudan ,Gess edu, امتحانات ومراجع لطلاب الهندسة لجميع السمسترات.">
     <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7IniYMpJnIFr7Ae9kIYO_3tk0o1KSI2MTg&s" />
     <link rel="apple-touch-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7IniYMpJnIFr7Ae9kIYO_3tk0o1KSI2MTg&s" />
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22GESS%20EDU%22,%22short_name%22:%22GESS%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22icons%22:[{%22src%22:%22https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl7IniYMpJnIFr7Ae9kIYO_3tk0o1KSI2MTg&s%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}" />
-    <title>GESS EDU | منصة المواد الهندسية والكمبيوتر</title>
+    <title>GESS EDU | منصة هندسة المساحة - جامعة الخرطوم</title>
     
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -29,29 +30,29 @@
 <body class="bg-[#fafafa]">
     <div id="root"></div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
 
-     
-        const firebaseConfig = {
-            apiKey: "ضع_هنا_API_KEY_الخاص_بك", 
-            authDomain: "gess-edu.firebaseapp.com",
-            projectId: "gess-edu",
-            storageBucket: "gess-edu.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef"
-        };
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSy...",
+    authDomain: "gess-platform.firebaseapp.com",
+    projectId: "gess-platform",
+    storageBucket: "gess-platform.firebasestorage.app",
+    messagingSenderId: "794482265366",
+    appId: "1:794482265366:web:0108b0cae375d8efd3d437",
+    measurementId: "G-JGMGBK6CVW"
+  };
 
-       
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const appId = 'gess-edu-platform';
-
-        window.fb = { db, auth, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy, signInAnonymously, onAuthStateChanged, appId };
-    </script>
+  // الطريقة الصحيحة لنظامك الحالي:
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const analytics = firebase.analytics(); // تشغيل التحليلات بدون استيراد معقد
+  // إضافة اختيارية للتأكد من الإرسال الفوري
+firebase.analytics().setUserProperties({ debug_mode: true });
+</script>
 
     <script type="text/babel">
         const { 
@@ -60,21 +61,98 @@
             LayoutDashboard, X, ShieldCheck, Search, Bell, Menu 
         } = lucide;
 
+        const t = {
+    ar: {
+        title: "منصة GESS EDU",
+        subtitle: "هندسة المساحة - جامعة الخرطوم",
+        login: "دخول للمنصة",
+        userPlaceholder: "اسم المستخدم",
+        passPlaceholder: "كلمة المرور",
+        logout: "تسجيل خروج",
+        academic: "المحتوى الأكاديمي",
+        special: "الكورسات الخاصة",
+        pdf: "ملفات PDF",
+        video: "فيديوهات",
+        exam: "امتحانات",
+        ref: "المراجع"
+    },
+    en: {
+        title: "GESS EDU PLATFORM",
+        subtitle: "Geomatics Engineering - U of K",
+        login: "Login to Platform",
+        userPlaceholder: "Username",
+        passPlaceholder: "Password",
+        logout: "Logout",
+        academic: "Academic Content",
+        special: "Special Courses",
+        pdf: "PDF Files",
+        video: "Videos",
+        exam: "Exams",
+        ref: "References"
+    }
+
+    
+};
+
         const GESS_LOGO = "data:image/jpeg;base64,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";
 
         function App() {
             const [user, setUser] = React.useState(null);
-            const [studentName, setStudentName] = React.useState("");
-            const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-            const [view, setView] = React.useState('login'); 
+            const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem("gess_is_logged_in") === "true");
+            const [studentName, setStudentName] = React.useState(localStorage.getItem("gess_user_name") || "");
+// تعديل السطر 115 في ملفك
+const [adminPass, setAdminPass] = React.useState('12345'); 
+
+            const [view, setView] = React.useState(localStorage.getItem("gess_is_logged_in") === "true" ? "student" : "login");
             const [showAdminAuth, setShowAdminAuth] = React.useState(false);
             const [adminPassInput, setAdminPassInput] = React.useState("");
             const [path, setPath] = React.useState([]);
-            const [contents, setContents] = React.useState([]);
             const [selectedItem, setSelectedItem] = React.useState(null);
             const [darkMode, setDarkMode] = React.useState(localStorage.getItem("gess_theme") === "dark");
             const [toast, setToast] = React.useState({ show: false, message: '' });
+            const [adminAddMode, setAdminAddMode] = React.useState('academic');
+            const [selectedSemester, setSelectedSemester] = React.useState("1");
+            const [loginType, setLoginType] = React.useState('student'); 
+            const [viewType, setViewType] = React.useState(null);
+            const [currentIcon, setCurrentIcon] = React.useState("settings"); 
+            const [lang, setLang] = React.useState('ar'); 
+            const [isModalOpen, setIsModalOpen] = React.useState(false);
+const [modalSubjectData, setModalSubjectData] = React.useState(null); 
+const [customSubject, setCustomSubject] = React.useState('');
+const [selectedYear, setSelectedYear] = React.useState('1');
+const [searchQuery, setSearchQuery] = React.useState('');
+            const [showToolsMenu, setShowToolsMenu] = React.useState(false); 
+            const [contents, setContents] = React.useState([]);
+            const [newLoginPass, setNewLoginPass] = React.useState('');
+            const [newAdminPass, setNewAdminPass] = React.useState('');
             
+            
+
+
+            React.useEffect(() => {
+  if (!localStorage.getItem('gess_login_pass')) {
+    localStorage.setItem('gess_login_pass', '123456');
+  }
+
+  if (!localStorage.getItem('gess_admin_pass')) {
+    localStorage.setItem('gess_admin_pass', 'admin123');
+  }
+}, []);
+
+            React.useEffect(() => {
+  const unsubscribe = db.collection("materials")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setContents(data);
+    });
+
+  return () => unsubscribe();
+}, []);
+
   React.useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -84,21 +162,84 @@
       localStorage.setItem("gess_theme", "light");
     }
   }, [darkMode]);  
-            const years = [1, 2, 3, 4, 5].map(y => ({ id: y, title: `السنة ${y === 1 ? 'الأولى' : y === 2 ? 'الثانية' : y === 3 ? 'الثالثة' : y === 4 ? 'الرابعة' : 'الخامسة'}` }));
-            const semesters = [{ id: 1, title: 'السمستر الأول' }, { id: 2, title: 'السمستر الثاني' }];
+           const years = [1, 2, 3, 4, 5].map(y => ({ id: y, title: lang === 'ar' ? `السنة ${y === 1 ? 'الأولى' : y === 2 ? 'الثانية' : y === 3 ? 'الثالثة' : y === 4 ? 'الرابعة' : 'الخامسة'}` : `Year ${y}` }));
+            const semesters = [{ id: 1, title: lang === 'ar' ? 'السمستر الأول' : 'First Semester' },{ id: 2, title: lang === 'ar' ? 'السمستر الثاني' : 'Second Semester' }]; 
+            const extraCourses = [
+    { 
+        id: 'c1', 
+        title: lang === 'ar' ? 'كورس البرمجة الشامل' : 'Comprehensive Programming Course', 
+        icon: 'Rocket' 
+    },
+    { 
+        id: 'c2', 
+        title: lang === 'ar' ? 'كورس التصميم الهندسي' : 'Engineering Design Course', 
+        icon: 'Settings' 
+    }
+];
+           // دالة الحذف
+const handleDelete = async (collectionName, docId) => {
+    if (!docId) {
+        alert("خطأ: لم يتم العثور على معرف الدرس (ID). تأكد من تحديث دالة الجلب.");
+        return;
+    }
 
-            React.useEffect(() => {
-                const { auth, db, signInAnonymously, onAuthStateChanged, query, collection, onSnapshot, appId } = window.fb;
-                
-                signInAnonymously(auth).catch(err => console.error("Auth Error:", err));
-                onAuthStateChanged(auth, setUser);
+    if (window.confirm("هل أنت متأكد من حذف هذا الدرس نهائياً؟")) {
+        try {
+            // استخدام db المعرف عندك في الكود
+            await db.collection(collectionName).doc(docId).delete();
+            alert("تم الحذف بنجاح");
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+            alert("فشل الحذف: " + error.message);
+        }
+    }
+};
 
-                const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'materials'));
-                const unsubscribe = onSnapshot(q, (snapshot) => {
-                    setContents(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-                });
-                return () => unsubscribe();
-            }, []);
+// دالة التعديل
+const handleEdit = async (collectionName, docId, currentTitle, currentUrl) => {
+    if (!docId) {
+        alert("خطأ في المعرف (ID)");
+        return;
+    }
+
+    const newTitle = window.prompt("تعديل الاسم:", currentTitle);
+    const newUrl = window.prompt("تعديل الرابط:", currentUrl);
+
+    if (newTitle && newUrl) {
+        try {
+            await db.collection(collectionName).doc(docId).update({
+                title: newTitle,
+                url: newUrl
+            });
+            alert("تم التعديل بنجاح");
+        } catch (error) {
+            console.error("Error updating document: ", error);
+            alert("فشل التعديل: " + error.message);
+        }
+    }
+};
+
+
+
+React.useEffect(() => {
+    // دالة بتشتغل لما الطالبة تدوس زرار الرجوع في موبايلها
+    const handleBack = (event) => {
+        if (selectedItem) {
+            setSelectedItem(null); // لو فاتحة فيديو أو PDF تقفله
+            window.history.pushState(null, null, window.location.pathname);
+        } else if (path.length > 0) {
+            setPath(prev => prev.slice(0, -1)); // لو داخلة مادة ترجع للسيمستر
+            window.history.pushState(null, null, window.location.pathname);
+        }
+    };
+
+    window.addEventListener('popstate', handleBack);
+    
+    // سطر مهم عشان "نخدع" المتصفح ونخليه يفتكر إن في صفحة قديمة
+    window.history.pushState(null, null, window.location.pathname);
+
+    return () => window.removeEventListener('popstate', handleBack);
+}, [path, selectedItem]);
 
   React.useEffect(() => {
     const handleBackButton = (e) => {
@@ -125,21 +266,42 @@
 
            const handleLogin = (e) => {
     e.preventDefault();
-    if (e.target.password.value === "Gess@123") {
-      const name = e.target.name.value;
-      setStudentName(name);
-     
-      localStorage.setItem("gess_user_name", name); 
-      setIsLoggedIn(true);
-      setView('student');
-       setToast({ show: true, message: `أهلاً بك يا ${name} في منصة GESS EDU` });
-        setTimeout(() => setToast({ show: false, message: '' }), 3000);
+    const formData = new FormData(e.target);
+    const enteredUser = formData.get('username');
+    const enteredPass = formData.get('password');
+
+    if (loginType === 'admin') {
+   const savedAdminPass = localStorage.getItem('gess_admin_pass');
+
+if (enteredUser === 'admin' && enteredPass === savedAdminPass) {
+        setIsAdmin(true);
+        setView('admin_dashboard'); // التوجيه لصفحة الإدارة فوراً
+            setToast({ show: true, message: lang === 'ar' ? "مرحباً أيها المدير" : "Welcome Admin" });
+        } else {
+            alert(lang === 'ar' ? "خطأ في بيانات الأدمن" : "Admin credentials error");
+        }
     } else {
-      setToast({ show: true, message: "⚠️ عذراً، كلمة المرور غير صحيحة" });
-setTimeout(() => setToast({ show: false, message: '' }), 3000);
+        // دخول الطالب (ممكن تربط باسوورد الطالب بنفس الطريقة لو حبيت)
+      const savedStudentPass = localStorage.getItem('gess_login_pass');
+        
+       if (enteredPass === savedStudentPass) {
+  setView('user_dashboard');
+} else {
+  alert("كلمة المرور غير صحيحة");
+}
     }
-  };
-    
+
+
+  // إخفاء التوست
+  setTimeout(() => setToast({ show: false, message: '' }), 3000);
+};
+    const handleLogOut = () => {
+    localStorage.removeItem('user_token'); 
+    localStorage.removeItem('is_admin'); 
+    setIsLoggedIn(false); 
+    setView('student'); 
+};
+
 React.useEffect(() => {
   const handlePopState = (event) => {
     if (view === 'admin') {
@@ -160,59 +322,110 @@ React.useEffect(() => {
   };
 }, [path, view]);
             
-            const checkAdminAuth = (e) => {
-                e.preventDefault();
-                if (adminPassInput === "Gess@123") {
-                    setView('admin');
-                    setShowAdminAuth(false);
-                    setAdminPassInput("");
-                    setPath([]);
-                } else {
-                   setToast({ show: true, message: "🚫 خطأ: كلمة مرور الإدارة غير صحيحة" });
-                    setTimeout(() => setToast({ show: false, message: '' }), 3000);
-                }
-            };
 
-            const addMaterial = async (e) => {
-                e.preventDefault();
-                const { db, collection, addDoc, appId } = window.fb;
-                const formData = new FormData(e.target);
-                const data = Object.fromEntries(formData.entries());
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'materials'), {
-                    ...data,
-                    yearId: parseInt(data.yearId),
-                    semesterId: parseInt(data.semesterId),
-                    createdAt: new Date().toISOString()
-                });
-                e.target.reset();
-                alert("تمت إضافة المادة بنجاح!");
-            };
+           const checkAdminAuth = (e) => {
+    e.preventDefault();
+    
+    // الباسوورد اللي إنت عايزه يكون ثابت
+    const hardcodedPass = "12345"; 
+    
+    // adminPassInput هو المتغير اللي شايل اللي اتكتب في الخانة
+    if (adminPassInput === hardcodedPass) {
+        setView('admin');
+        setShowAdminAuth(false);
+        setAdminPassInput("");
+        setPath([]);
+        // اختياري: حفظه في الجهاز عشان ما يطلبه كل مرة
+        localStorage.setItem('gess_admin_pass', hardcodedPass);
+    } else {
+        setToast({ 
+            show: true, 
+            message: lang === 'ar' ? "خطأ: كلمة مرور الإدارة غير صحيحة" : "Incorrect Admin Password" 
+        });
+        setTimeout(() => setToast({ show: false, message: '' }), 3000);
+    }
+};
 
-            if (view === 'login') return (
-                <div className={`min-h-screen relative flex items-center justify-center p-4 overflow-hidden transition-colors duration-500 ${darkMode ? 'bg-gray-900' : ''}`}>
-                    <div className="absolute inset-0 z-0">
-                       <div className={`absolute inset-0 transition-colors duration-500 ${darkMode ? 'bg-black/60' : 'bg-[#f58220]/10'} mix-blend-multiply z-10`}></div>
-                        <img src="https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?q=80&w=1600" className="w-full h-full object-cover blur-md scale-110" />
-                    </div>
-                    <div className={`relative z-20 transition-all duration-500 p-8 rounded-[2.5rem] shadow-2xl w-full max-w-md border backdrop-blur-xl ${darkMode ? 'bg-gray-800/90 border-gray-700' : 'bg-white/80 border-white/50'}`}>
-                        <div className="flex flex-col items-center mb-8">
-                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg p-2 mb-4 border-2 border-[#f58220]">
-                                <img src={GESS_LOGO} className="w-full h-full object-contain rounded-full" />
-                            </div>
-                            <h1 className={`text-2xl font-black transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>GESS EDU PLATFORM</h1>
-                            <p className="text-[#f58220] font-bold text-sm tracking-widest mt-1">هندسة المساحة - جامعة الخرطوم</p>
-                        </div>
-                        <form onSubmit={handleLogin} className="space-y-5">
-                            <div className="relative group">
-                                <i data-lucide="user" className="absolute right-4 top-4 text-gray-400 group-focus-within:text-[#f58220]"></i>
-                                <input name="name" required placeholder="اسم المستخدم" className="w-full pr-12 p-4 bg-white border-2 border-transparent focus:border-[#f58220] rounded-2xl outline-none font-bold shadow-inner" />
-                            </div>
-                            <div className="relative group">
-                                <i data-lucide="lock" className="absolute right-4 top-4 text-gray-400 group-focus-within:text-[#f58220]"></i>
-                                <input name="password" type="password" required placeholder="كلمة المرور" className="w-full pr-12 p-4 bg-white border-2 border-transparent focus:border-[#f58220] rounded-2xl outline-none font-bold shadow-inner" />
-                            </div>
-                            <button className="w-full bg-[#f58220] text-white p-4 rounded-2xl font-black shadow-lg shadow-[#f58220]/30 hover:bg-[#d96e1a] transition-all">دخول للمنصة</button>
-                        </form>
+          const addMaterial = async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+
+  // 1. تحديد اسم المادة (سواء من المودال أو الفورم العادي)
+  const subjectName = modalSubjectData ? modalSubjectData.subject : (customSubject || form.subject?.value || "عام");
+
+  // 2. قراءة الرابط والنوع (دول بس اللي بنحتاجهم من الأدمن)
+  const urlValue = form.url?.value;
+  const typeValue = form.type?.value || "pdf";
+
+  if (!urlValue) {
+    alert("يا هندسة، الرابط وين؟ لازم تضع الرابط أولاً");
+    return;
+  }
+
+  // 3. تجهيز البيانات (هنا بنحط اسم تلقائي للدرس عشان الفايربيز ما يزعل)
+  const data = {
+    subject: subjectName,
+    // حيسمي الدرس تلقائياً باسم المادة + " - محتوى جديد"
+    title: subjectName + " - محتوى جديد", 
+    url: urlValue,
+    type: typeValue,
+    yearId: modalSubjectData ? String(modalSubjectData.yearId) : (form.yearId?.value || null),
+    semesterId: modalSubjectData ? String(modalSubjectData.semesterId) : (form.semesterId?.value || null),
+    category: adminAddMode || 'academic',
+    createdAt: new Date()
+  };
+
+  try {
+    // 4. الرفع المباشر
+    await db.collection("materials").add(data); 
+
+    alert("✅ تم الرفع بنجاح بدون الحاجة لاسم الدرس");
+
+    // تنظيف الفورم وقفل المودال
+    form.reset();
+    if(typeof setIsModalOpen === 'function') setIsModalOpen(false);
+
+  } catch (error) {
+    console.error("Firebase Error:", error);
+    alert("فشل الرفع: " + error.message);
+  }
+};
+
+            if (view === '') return (
+                <div id="auth-container" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-promax-dark/40 backdrop-blur-xl"></div>
+    
+    <div id="auth-card" class="relative w-full max-w-md bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-2xl animate-in">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-promax-light tracking-wider">CS PROMAX</h1>
+            <p class="text-promax-accent text-sm mt-2">نظام التحقق الأكاديمي</p>
+        </div>
+
+        <div id="auth-steps">
+            <div id="step-1" class="space-y-4">
+                <input type="number" id="uni-id" placeholder="أدخل الرقم الجامعي" 
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-promax-gold transition-all">
+                <button onclick="checkStudentID()" class="w-full bg-promax-gold hover:bg-promax-accent text-promax-dark font-bold py-3 rounded-xl transition-all shadow-lg">
+                    التحقق من الهوية
+                </button>
+            </div>
+
+            <div id="step-2" class="hidden space-y-4 text-center">
+                <h2 id="welcome-msg" class="text-2xl text-white font-semibold mb-4"></h2>
+                <input type="password" id="user-pass" placeholder="أنشئ كلمة مرور جديدة" 
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-promax-gold">
+                <input type="password" id="confirm-pass" placeholder="تأكيد كلمة المرور" 
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-promax-gold">
+                <input type="email" id="user-email" placeholder="أدخل إيميلك (اختياري)" 
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-promax-gold">
+                <button onclick="saveStudentData()" class="w-full bg-promax-gold text-promax-dark font-bold py-3 rounded-xl transition-all">
+                    إكمال التسجيل والدخول
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
                     </div>
                 </div>
             );
@@ -223,87 +436,394 @@ React.useEffect(() => {
                         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
                             <div className={`p-8 rounded-[2.5rem] shadow-2xl w-full max-w-sm border transition-all ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-100'}`}>
                                 <div className="flex justify-between items-center mb-6">
-                                    <h3 className="font-black text-[#f58220] flex items-center gap-2"><i data-lucide="shield-check"></i> الإدارة فقط</h3>
-                                    <button onClick={() => setShowAdminAuth(false)} className="p-2 hover:bg-gray-100 rounded-full"><i data-lucide="x"></i></button>
+                                    <h3 className="font-black text-[#f58220] flex items-center gap-2"><i data-lucide="shield-check"></i>{lang === 'ar' ? "الإدارة فقط" : "Admin Only"}</h3>
+                                    <button onClick={() => setShowAdminAuth(false)} title={lang === 'ar' ? "إغلاق" : "Close"} className="p-2 hover:bg-gray-100 rounded-full"><i data-lucide="x"></i></button>
                                 </div>
                                 <form onSubmit={checkAdminAuth} className="space-y-4">
-                                    <p className="text-xs text-gray-500 font-bold">يرجى إدخال كلمة المرور الخاصة بالمشرف.</p>
+                                    <p className="text-xs text-gray-500 font-bold">{lang === 'ar' ? "يرجى إدخال كلمة المرور الخاصة بالمشرف" : "Please enter the admin password"}</p>
                                     <input type="password" autoFocus className="w-full p-4 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#f58220] outline-none font-bold text-center" value={adminPassInput} onChange={(e) => setAdminPassInput(e.target.value)} />
-                                    <button className="w-full bg-gray-900 text-white p-4 rounded-2xl font-black">تأكيد الهوية</button>
+                                    <button className="w-full bg-gray-900 text-white p-4 rounded-2xl font-black">{lang === 'ar' ? "تأكيد الهوية" : "Confirm Identity"}</button>
                                 </form>
                             </div>
                         </div>
                     )}
 
-                   <header className={`sticky top-0 z-50 border-b h-20 flex items-center transition-all ${darkMode ? 'bg-gray-800 border-gray-700 shadow-xl' : 'bg-white border-gray-100 shadow-sm'}`}>
-                        <div className="max-w-6xl mx-auto px-4 w-full flex items-center justify-between">
-                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => {setView('student'); setPath([]); setSelectedItem(null);}}>
-                               <div className={`w-12 h-12 border rounded-lg p-1 transition-all ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'}`}>
-                                    <img src={GESS_LOGO} className="w-full h-full object-contain" />
-                                </div>
-                                <div>
-                                    <h1 className={`text-lg font-black leading-none transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>GESS EDU</h1>
-                                    <p className="text-[10px] text-[#f58220] font-bold mt-1">نحو آفاق هندسية أوسع</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                               <div className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${darkMode ? 'bg-gray-700 text-yellow-400' : 'bg-[#f58220]/5 text-[#f58220]'}`}>
-                                    <i data-lucide="user" class="w-4 h-4"></i>
-                                    <span className="text-sm font-black italic">{studentName}</span>
-                                </div>
-                                <div className={`flex gap-1 p-1 rounded-xl transition-colors ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                                    <button onClick={() => view === 'admin' ? setView('student') : setShowAdminAuth(true)} className={`p-3 rounded-lg ${view === 'admin' ? 'bg-[#f58220] text-white' : 'text-gray-400'}`}><i data-lucide="settings"></i></button>
-                                  <button onClick={() => setDarkMode(!darkMode)} className={`p-2 rounded-lg transition-all ${darkMode ? 'bg-gray-600 text-yellow-400' : 'bg-gray-100 text-gray-600'}`}><i data-lucide={darkMode ? "sun" : "moon"} className="w-4 h-4"></i></button>
-                                    <button onClick={() => {localStorage.removeItem("gess_user_name"); window.location.reload(); }} className="p-3 text-red-400"> <i data-lucide="log-out"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+                   <header className={`sticky top-0 z-[100] w-full h-20 flex items-center transition-all ${
+    darkMode ? 'bg-gray-900/95 border-b border-gray-800 backdrop-blur-md' : 'bg-white/95 border-b border-gray-100 backdrop-blur-md'
+}`}>
+    <div className="max-w-6xl mx-auto px-4 w-full flex items-center justify-between">
+        
+        <div className="flex items-center gap-3 order-first">
+            
+                <img src="data:image/jpeg;base64,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"alt="Logo"
+                className="w-10 h-10 object-contain rounded-lg shadow-sm"onError={(e) => { e.target.style.display = 'none'; }}/>
+            <div className="flex flex-col">
+                <span className={`font-black text-sm leading-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    GESS EDU
+                </span>
+                <span className="text-[10px] text-[#f58220] font-bold leading-tight">
+                    {lang === 'ar' ? 'نحو آفاق هندسية أوسع' : 'Towards Broader Engineering Horizons'}
+                </span>
+            </div>
+        </div>
 
+        <div className="flex items-center gap-2 order-last">
+            <div className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+                darkMode ? 'bg-gray-800 text-yellow-400' : 'bg-orange-50 text-[#f58220]'
+            }`}>
+                <i data-lucide="user" className="w-4 h-4"></i>
+                <span className="text-sm font-black italic">{studentName}</span>
+            </div>
+            <div className="relative">
+                <button 
+                    onClick={() => setShowToolsMenu(!showToolsMenu)} 
+                    className={`p-3 rounded-xl transition-all shadow-sm border ${
+                        showToolsMenu 
+                        ? 'bg-[#f58220] text-white border-[#f58220]' 
+                        : (darkMode ? 'bg-gray-800 border-gray-700 text-gray-300' : 'bg-white border-orange-100 text-[#f58220]')
+                    }`}
+                >
+                    <i data-lucide={showToolsMenu ? "x" : "settings"} className="w-5 h-5"></i>
+                </button>
+                {showToolsMenu && (
+                    <div className={`absolute mt-3 w-56 rounded-2xl shadow-2xl border z-[110] animate-in fade-in zoom-in-95 duration-200 
+                        ${lang === 'ar' ? 'left-0' : 'right-0'} 
+                        ${darkMode ? 'bg-gray-800 border-gray-700 shadow-black/50' : 'bg-white border-gray-100 shadow-orange-200/50'}`}
+                    >
+                        <div className="p-2 space-y-1">
+                            <button 
+                                onClick={() => {
+                                    const newLang = lang === 'ar' ? 'en' : 'ar';
+                                    setLang(newLang);
+                                    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+                                    setShowToolsMenu(false);
+                                }}
+                                className={`flex items-center justify-between w-full p-3 rounded-xl text-sm font-bold transition-colors ${
+                                    darkMode ? 'hover:bg-gray-700 text-orange-400' : 'hover:bg-orange-50 text-orange-600'
+                                }`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <i data-lucide="languages" className="w-4 h-4"></i>
+                                    {lang === 'ar' ? 'English' : 'عربي'}
+                                </div>
+                            </button>
+                            <button 
+                                onClick={() => {setDarkMode(!darkMode); setShowToolsMenu(false);}}
+                                className={`flex items-center justify-between w-full p-3 rounded-xl text-sm transition-colors ${
+                                    darkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-50 text-gray-600'
+                                }`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <i data-lucide={darkMode ? "sun" : "moon"} className="w-4 h-4"></i>
+                                    {darkMode ? (lang === 'ar' ? "الوضع الفاتح" : "Light Mode") : (lang === 'ar' ? "الوضع الداكن" : "Dark Mode")}
+                                </div>
+                            </button>
+
+                            <button 
+                                onClick={() => {
+                                    view === 'admin' ? setView('student') : setShowAdminAuth(true);
+                                    setShowToolsMenu(false);
+                                }}
+                                className={`flex items-center justify-between w-full p-3 rounded-xl text-sm transition-colors ${
+                                    view === 'admin' 
+                                    ? 'bg-orange-500 text-white' 
+                                    : (darkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-50 text-gray-600')
+                                }`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <i data-lucide="shield-check" className="w-4 h-4"></i>
+                                    {lang === 'ar' ? "لوحة الإدارة" : "Admin Panel"}
+                                </div>
+                            </button>
+
+                            <div className={`border-t my-1 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`}></div>
+                            <button 
+                                onClick={() => {
+                                    handleLogOut(); 
+                                    setShowToolsMenu(false); 
+                                }}
+                                className="flex items-center gap-3 w-full p-3 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
+                            >
+                                <i data-lucide="log-out" className="w-4 h-4"></i>
+                                {lang === 'ar' ? "تسجيل الخروج" : "Log Out"}
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    </div>
+</header>
                     <main className={`max-w-6xl mx-auto px-4 py-8 transition-colors ${darkMode ? 'text-white' : ''}`}>
                         {view === 'admin' ? (
                             <div className="max-w-4xl mx-auto animate-in">
                                 <div className={`p-8 rounded-[2.5rem] shadow-sm border transition-all ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-100 mb-8'}`}>
-                                   <h2 className={`text-xl font-black mb-6 border-b pb-4 flex items-center gap-2 ${darkMode ? 'border-gray-700 text-white' : 'border-gray-100 text-gray-800'}`}><i data-lucide="layout-dashboard"></i> إضافة مادة</h2> 
+                                   <h2 className={`text-xl font-black mb-6 border-b pb-4 flex items-center gap-2 ${darkMode ? 'border-gray-700 text-white' : 'border-gray-100 text-gray-800'}`}><i data-lucide="layout-dashboard"></i>{lang === 'ar' ? "إضافة محتوى جديد" : "Add New Content"}</h2> 
                                     <form onSubmit={addMaterial} className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                        <input name="subject" required placeholder="اسم المادة" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`} />
-                                        <input name="title" required placeholder="عنوان الدرس" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`} />
-                                        <input name="url" required placeholder="الرابط المباشر" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`} />
-                                        <select name="yearId" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`}>
+                                      <div className={`flex gap-4 mb-6 p-1 rounded-2xl transition-all ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+
+  <button
+    type="button"
+    onClick={() => setAdminAddMode('academic')}
+    className={`flex-1 p-4 rounded-xl text-base transition-all duration-300 ${adminAddMode === 'academic' 
+      ? (darkMode ? 'bg-gray-700 shadow-lg text-orange-400 font-bold' : 'bg-white shadow text-orange-600 font-bold') 
+      : (darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700')}`}
+  >
+   {lang === 'ar' ? "مادة دراسية" : "Academic Subject"}
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setAdminAddMode('special_course')}
+    className={`flex-1 p-4 rounded-xl text-base transition-all duration-300 ${adminAddMode === 'special_course' 
+      ? (darkMode ? 'bg-gray-700 shadow-lg text-orange-400 font-bold' : 'bg-white shadow text-orange-600 font-bold') 
+      : (darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700')}`}
+  >
+   {lang === 'ar' ? "كورس تدريب" : "Training Course"}
+  </button>
+
+</div>
+                                        <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+ <div className="mt-8 space-y-6">
+    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h3 className={`font-black text-xl ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                {lang === 'ar' ? "إدارة المواد" : "Manage Subjects"}
+            </h3>
+            <p className="text-sm text-gray-400">
+                {lang === 'ar' ? "فلتر المواد حسب السنة والسمستر" : "Filter subjects by year and semester"}
+            </p>
+        </div>
+
+        {/* خانة البحث السريع بالاسم */}
+        <div className="relative">
+            <i data-lucide="search" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+            <input 
+                type="text"
+                placeholder={lang === 'ar' ? "بحث عن مادة..." : "Search subject..."}
+                onChange={(e) => setSearchQuery(e.target.value)} // لازم تعرف setSearchQuery في الـ State فوق
+                className={`ps-10 p-3 rounded-xl border-2 outline-none transition-all text-sm w-full md:w-64 ${darkMode ? 'bg-gray-800 border-gray-700 text-white focus:border-orange-500' : 'bg-white border-gray-100 focus:border-orange-500'}`}
+            />
+        </div>
+    </div>
+
+    {/* شبكة الكروت بعد الفلترة الذكية */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {contents && contents
+            .filter(c => 
+                c.category === 'academic' && 
+                String(c.yearId) === String(selectedYear) && 
+                String(c.semesterId) === String(selectedSemester) &&
+                (c.subject.toLowerCase().includes(searchQuery.toLowerCase())) // فلتر البحث
+            )
+            .reduce((acc, current) => {
+                const x = acc.find(item => item.subject === current.subject);
+                if (!x) return acc.concat([current]);
+                return acc;
+            }, [])
+            .map((subjectItem, index) => (
+                <div key={index} className={`p-4 rounded-2xl border-2 flex items-center justify-between transition-all hover:shadow-md ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'}`}>
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center">
+                            <i data-lucide="book-marked" className="w-5 h-5"></i>
+                        </div>
+                        <h4 className={`font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{subjectItem.subject}</h4>
+                    </div>
+                    
+                    <button 
+                        type="button"
+                        onClick={() => {
+                            setModalSubjectData(subjectItem);
+                            setIsModalOpen(true);
+                        }}
+                        className="p-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all"
+                    >
+                        <i data-lucide="plus" className="w-4 h-4"></i>
+                    </button>
+                </div>
+            ))
+        }
+    </div>
+
+    {/* رسالة في حال مفيش مواد مطابقة للفلتر */}
+    {(!contents || contents.filter(c => c.category === 'academic' && String(c.yearId) === String(selectedYear) && String(c.semesterId) === String(selectedSemester)).length === 0) && (
+        <div className="text-center py-10 border-2 border-dashed border-gray-200 rounded-3xl">
+            <p className="text-gray-400 font-bold">
+                {lang === 'ar' ? "لا توجد مواد مضافة لهذه السنة/السمستر" : "No subjects for this year/semester"}
+            </p>
+        </div>
+    )}
+</div>
+
+  <input
+    type="text"
+    placeholder={lang === 'ar' ? "أو اكتب مادة جديدة" : "Or enter new subject"}
+    value={customSubject}
+    onChange={(e) => {
+      setCustomSubject(e.target.value);
+      setSelectedSubject('');
+    }}
+    className={`p-4 rounded-2xl border-2 ${
+      darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white border-gray-200'
+    }`}
+  />
+
+</div>
+                                       
+                                        <input name="url" required placeholder={lang === 'ar' ? "الرابط المباشر" : "Direct Link"} className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-black border-gray-200'} focus:border-[#f58220]`} />
+                                        {adminAddMode === 'academic' && (<>
+                                        <select name="yearId" onChange={(e) => setSelectedYear(e.target.value)}>
                                             {years.map(y => <option key={y.id} value={y.id}>{y.title}</option>)}
                                         </select>
-                                        <select name="semesterId" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`}>
+                                        <select name="semesterId" onChange={(e) => setSelectedSemester(e.target.value)}>
                                             {semesters.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
-                                        </select>
+                                        </select></>)}
                                         <select name="type" className={`w-full p-4 rounded-2xl border-2 transition-all outline-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-[#f58220]' : 'bg-gray-50 border-transparent focus:bg-white focus:border-[#f58220]'}`}>
-                                            <option value="video">محاضرة فيديو</option>
-                                            <option value="pdf">ملف ملخص</option>
+                                            <option value="video">{lang === 'ar' ? "محاضرة فيديو" : "Video Lecture"}</option>
+                                            <option value="pdf">{lang === 'ar' ? "ملف ملخص" : "Summary PDF"}</option>
+                                            <option value="exam">{lang === 'ar' ? "امتحان" : "Exam"}</option>
+                                            <option value="reference">{lang === 'ar' ? "مرجع" : "Reference"}</option>
                                         </select>
-                                        <button className="md:col-span-3 bg-[#f58220] text-white p-5 rounded-2xl font-black">نشر المحتوى</button>
+                                        <button className={`md:col-span-3 w-full p-5 rounded-2xl font-bold transition-all shadow-lg ${
+  darkMode 
+    ? 'bg-[#f58220] hover:bg-[#e67610] text-white shadow-orange-900/20' 
+    : 'bg-[#f58220] hover:bg-[#e67610] text-white shadow-orange-200'
+}`}>{lang === 'ar' ? "نشر المحتوى الآن" : "Post Content Now"}</button>
                                     </form>
                                 </div>
+                                <div className="mt-12 pt-8 border-t-2 border-gray-100">
+    <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+        <i data-lucide="shield-check" className="text-orange-500"></i>
+       {lang === 'ar' ? "إعدادات الأمان وتغيير كلمات المرور" : "Security Settings & Password Change"}
+    </h3>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+       
+        <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200">
+            <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200">
+    <div className="flex justify-between items-center mb-2">
+        <label className="font-bold text-sm text-gray-600">{lang === 'ar' ? "كلمة مرور دخول الموقع" : "Website Access Password"}</label>
+      
+         <span 
+    onClick={(e) => {
+     const current = localStorage.getItem('gess_admin_pass');
+      e.target.innerText = e.target.innerText.includes(lang === 'ar' ? 'إظهار' : 'Show') 
+    ? `${lang === 'ar' ? 'كلمة المرور الحالية' : 'Current Password'}: ${current} 👁️` 
+    : (lang === 'ar' ? '👁️ إظهار كلمة المرور' : '👁️ Show Password');
+    }}
+    className={`text-[10px] px-2 py-1 rounded-lg cursor-pointer transition-all ${
+      darkMode ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+    }`}
+  >
+    {lang === 'ar' ? "👁️ إظهار كلمة المرور" : "👁️ Show Password"}
+  </span>
+    </div>
+    <input 
+  type="password" 
+  placeholder={lang === 'ar' ? "كلمة المرور الجديدة" : "New Password"}
+  onChange={(e) => setNewLoginPass(e.target.value)}
+  className={`w-full p-4 rounded-2xl border-2 transition-all outline-none mt-4 ${
+    darkMode 
+      ? 'bg-gray-800 border-gray-700 text-white placeholder:text-gray-500' 
+      : 'bg-white border-gray-100 text-black'
+  } focus:border-orange-500`}
+/>
+</div>
+           
+            <button 
+               onClick={() => {
+  localStorage.setItem('gess_login_pass', newLoginPass);
+  alert('✅ تم تغيير كلمة المرور');
+}}
+                className={`w-full p-4 rounded-2xl font-bold transition-all mt-6 ${
+  darkMode 
+    ? 'bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 shadow-lg' 
+    : 'bg-gray-900 hover:bg-black text-white shadow-md'
+}`}
+            >
+               {lang === 'ar' ? "تحديث كلمة مرور الدخول" : "Update Login Password"}
+            </button>
+        </div>
+
+        <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200">
+           <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200">
+    <div className="flex justify-between items-center mb-2">
+        <label className="font-bold text-sm text-gray-600">{lang === 'ar' ? "كلمة مرور لوحة الأدمن" : "Admin Panel Password"}</label>
+        <span 
+    onClick={(e) => {
+     const current = localStorage.getItem('gess_admin_pass');
+      e.target.innerText = e.target.innerText.includes(lang === 'ar' ? 'إظهار' : 'Show') 
+    ? `${lang === 'ar' ? 'الحالية' : 'Current'}: ${current} 👁️` 
+    : (lang === 'ar' ? '👁️ إظهار كلمة المرور' : '👁️ Show Password');
+    }}
+    className={`text-[10px] px-2 py-1 rounded-lg cursor-pointer transition-all ${
+      darkMode ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+    }`}
+  >
+  {lang === 'ar' ? "👁️ إظهار كلمة المرور" : "👁️ Show Password"}
+  </span>
+    </div>
+   <input 
+  type="password" 
+ placeholder={lang === 'ar' ? "كلمة المرور الجديدة" : "New Password"}
+  onChange={(e) => setNewAdminPass(e.target.value)}
+  className={`w-full p-4 rounded-2xl border-2 transition-all outline-none mt-4 ${
+    darkMode 
+      ? 'bg-gray-800 border-gray-700 text-white placeholder:text-gray-500' 
+      : 'bg-white border-gray-100 text-black'
+  } focus:border-orange-500`}
+/>
+</div>
+           
+            <button 
+                onClick={() => {
+  localStorage.setItem('gess_admin_pass', newAdminPass);
+  alert('✅ تم تغيير كلمة مرور الأدمن');
+}}
+              className={`w-full p-4 rounded-2xl font-bold transition-all mt-6 shadow-lg ${
+  darkMode 
+    ? 'bg-[#f58220] hover:bg-[#e67610] text-white shadow-orange-900/20' 
+    : 'bg-[#f58220] hover:bg-[#e67610] text-white shadow-orange-200'
+}`}
+            >
+               {lang === 'ar' ? "تحديث كلمة مرور الأدمن" : "Update Admin Password"}
+            </button>
+        </div>
+    </div>
+</div>
                             </div>
                         ) : (
                             <div className={`animate-in transition-colors ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                                 {(path.length > 0 || selectedItem) && (
                                     <button onClick={() => selectedItem ? setSelectedItem(null) : setPath(path.slice(0, -1))} className="mb-8 flex items-center gap-2 text-[#f58220] font-black bg-white px-6 py-3 rounded-2xl shadow-sm border border-gray-50">
-                                        <i data-lucide="chevron-left" class="rotate-180"></i> رجوع
+                                       <i data-lucide="chevron-left" className="rotate-180"></i>{lang === 'ar' ? "رجوع" : "Back"}
                                     </button>
                                 )}
 
                                 {path.length === 0 && !selectedItem && (
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <>
                                         {years.map(y => (
                                            <button key={y.id} onClick={() => setPath([{type: 'year', ...y}])} className={`p-8 rounded-[2.5rem] border transition-all duration-300 flex flex-col items-center group ${darkMode ? 'bg-gray-800 border-gray-700 shadow-2xl' : 'bg-white border-gray-100 shadow-sm hover:shadow-md'}`}>
                                                 <i data-lucide="graduation-cap" class="w-12 h-12 text-[#f58220] mb-4"></i>
                                                <h3 className={`text-2xl font-black transition-colors ${darkMode ? 'text-white' : 'text-gray-800'}`}>{y.title}</h3>
-                                                <p className="text-gray-400 text-sm mt-2">عرض المواد الدراسية</p>
+                                                <p className="text-gray-400 text-sm mt-2">{lang === 'ar' ? "عرض المواد الدراسية" : "View Academic Subjects"}</p>
                                             </button>
                                         ))}
+                                            <button 
+                                                onClick={() => setPath([{ id: 'courses', title: lang === 'ar' ? 'الكورسات التدريبية' : 'Training Courses', type: 'courses_section' }])}
+                                                className={`p-8 rounded-2xl cursor-pointer shadow-lg transform transition hover:scale-105 text-center flex flex-col items-center justify-center bg-gradient-to-br from-orange-500 to-red-600 text-white`}>
+                                                <i data-lucide="rocket" class="w-12 h-12 mb-4"></i>
+                                                <h3 className="text-2xl font-black">{lang === 'ar' ? "الكورسات التدريبية" : "Training Courses"}</h3>
+                                                <p className="text-white/80 text-sm mt-2">{lang === 'ar' ? "تطوير المهارات والبرامج الخارجية" : "Skills Development & External Programs"}</p>
+                                            </button>
+                                        </>
                                     </div>
+                                    
                                 )}
 
-                                {path.length === 1 && (
+                                {path.length === 1 && path[0].type === 'year' && (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                                         {semesters.map(s => (
                                             <button key={s.id} onClick={() => setPath([...path, {type: 'semester', ...s}])} className={`p-8 rounded-[2.5rem] border transition-all duration-300 flex flex-col items-center group ${darkMode ? 'bg-gray-800 border-gray-700 shadow-2xl' : 'bg-white border-gray-100 shadow-sm hover:shadow-md'}`}>
@@ -314,35 +834,157 @@ React.useEffect(() => {
                                     </div>
                                 )}
 
-                                {path.length === 2 && (
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        {Array.from(new Set(contents.filter(c => c.yearId === path[0].id && c.semesterId === path[1].id).map(c => c.subject))).map(sub => (
-                                            <button key={sub} onClick={() => setPath([...path, {type: 'subject', title: sub}])} className="bg-white p-8 rounded-[2rem] border hover:bg-[#f58220]/5 text-center">
-                                                <i data-lucide="folder-open" class="w-10 h-10 text-[#f58220] mx-auto mb-2"></i>
-                                                <span className="font-black text-gray-700">{sub}</span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+{path.length == 1 && path[0].id == 'courses' && (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in duration-500">
 
-                                {path.length === 3 && !selectedItem && (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        {contents.filter(c => c.yearId === path[0].id && c.semesterId === path[1].id && c.subject === path[2].title).map(item => (
-                                            <button key={item.id} onClick={() => setSelectedItem(item)} className="bg-white p-6 rounded-[2rem] border flex items-center justify-between hover:shadow-lg transition-all text-right">
-                                                <div className="flex items-center gap-4">
-                                                    <div className={`p-4 rounded-xl ${item.type === 'video' ? 'bg-red-50 text-red-500' : 'bg-indigo-50 text-indigo-500'}`}>
-                                                        {item.type === 'video' ? <i data-lucide="video"></i> : <i data-lucide="file-text"></i>}
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="font-black text-lg">{item.title}</h4>
-                                                        <p className="text-[10px] font-bold text-gray-400 italic uppercase">{item.type}</p>
-                                                    </div>
-                                                </div>
-                                                <i data-lucide="chevron-left" class="text-gray-300"></i>
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+        {[...new Set(
+  contents
+    .filter(c => c.category === 'special_course')
+    .map(c => c.courseName)
+)].map(courseName => (
+            <button 
+                key={courseName}
+                onClick={() => setPath([...path, { id: courseName, title: courseName, type: 'inside_course' }])}
+                className="p-8 rounded-2xl bg-white dark:bg-gray-800 shadow-xl hover:scale-105 transition text-center border-2 border-orange-500"
+            >
+                <i data-lucide="book" class="w-12 h-12 mb-4 text-orange-500"></i>
+                <h3 className="text-2xl font-bold">{courseName}</h3>
+                <p>{lang === 'ar' ? "اضغط لعرض المحتويات" : "Click to view contents"}</p>
+            </button>
+        ))}
+        
+        {contents.filter(c => c.category == 'special_course').length == 0 && (
+            <div className="col-span-full text-center p-10 opacity-50">
+               <p>{lang === 'ar' ? "..لا توجد كورسات مضافة حالياً" : "No courses added yet.."}</p>
+            </div>
+        )}
+    </div>
+)}
+
+                               {path.length == 2 && (
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    {[...new Set(
+      contents
+        .filter(c =>
+          c.yearId == path[0].id &&
+          c.semesterId == path[1].id
+        )
+        .map(c => c.subject)
+    )].map(subject => (
+
+      <button
+        key={subject}
+        onClick={() => setPath([...path, { title: subject, type: 'subject' }])}
+        className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-xl hover:scale-105 transition border-2 border-orange-500"
+      >
+        <h3 className="text-xl font-bold">{subject}</h3>
+        <p>{lang === 'ar' ? "اضغط لعرض المحتوى" : "Click to view contents"}</p>
+      </button>
+
+    ))}
+
+  </div>
+)}
+
+                                {path.length == 3 && path[2].type == 'subject' && !selectedItem && (
+  <div className="grid grid-cols-2 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+
+    <button onClick={() => {setView('videos');setPath([...path, { type: 'contentType' }]); firebase.analytics().logEvent('select_category', { category: 'videos' });}} className="p-6 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex flex-col items-center shadow-sm border border-blue-100">
+      <i data-lucide="video" className="w-10 h-10 mb-2 text-blue-600"></i>
+      <span className="font-bold">{lang === 'ar' ? "فيديوهات" : "Videos"}</span>
+    </button>
+
+    <button onClick={() => {
+  setView('pdfs');
+  setPath([...path, { type: 'contentType' }]);
+  firebase.analytics().logEvent('select_category', { category: 'pdfs' });
+}} className="p-6 rounded-xl bg-red-50 dark:bg-red-900/20 flex flex-col items-center shadow-sm border border-red-100">
+      <i data-lucide="file-text" className="w-10 h-10 mb-2 text-red-600"></i>
+      <span className="font-bold">{lang === 'ar' ? "ملفات PDF" : "PDF Files"}</span>
+    </button>
+
+    <button onClick={() => {
+  setView('exams');
+  setPath([...path, { type: 'contentType' }]);
+  firebase.analytics().logEvent('select_category', { category: 'exams' });
+}} className="p-6 rounded-xl bg-green-50 dark:bg-green-900/20 flex flex-col items-center shadow-sm border border-green-100">
+      <i data-lucide="clipboard-list" className="w-10 h-10 mb-2 text-green-600"></i>
+      <span className="font-bold">{lang === 'ar' ? "امتحانات" : "Exams"}</span>
+    </button>
+
+    <button onClick={() => {
+  setView('refs');
+  setPath([...path, { type: 'contentType' }]);
+  firebase.analytics().logEvent('select_category', { category: 'references' });
+}} className="p-6 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex flex-col items-center shadow-sm border border-purple-100">
+      <i data-lucide="external-link" className="w-10 h-10 mb-2 text-purple-600"></i>
+      <span className="font-bold">{lang === 'ar' ? "المراجع" : "References"}</span>
+    </button>
+
+  </div>
+)}
+
+                                {path.length == 4 && !selectedItem && (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+    {contents
+  .filter(c =>
+    String(c.yearId) == String(path[0].id) &&
+    String(c.semesterId) == String(path[1].id) &&
+    c.subject?.trim() == path[2].title?.trim() &&
+    (
+      (view == 'videos' && c.type == 'video') ||
+      (view == 'pdfs' && c.type == 'pdf') ||
+      (view == 'exams' && c.type == 'exam') ||
+      (view == 'refs' && c.type == 'reference')
+    )
+  )
+      .map(item => (
+
+        <button
+  key={item.id}
+  onClick={() => {
+    // 1. الوظيفة القديمة (فتح تفاصيل الدرس)
+    setSelectedItem(item);
+
+    // 2. الوظيفة الجديدة (تبليغ جوجل أن الطالب فتح هذا الدرس)
+    if (typeof firebase !== 'undefined') {
+      firebase.analytics().logEvent('view_lecture', {
+        lecture_title: item.title,
+        subject: item.subject,
+        type: item.type
+      });
+    }
+  }}
+  className="bg-white p-6 rounded-[2rem] border flex items-center justify-between hover:shadow-lg transition-all"
+>
+          <div className="flex items-center gap-4">
+            <div className={`p-4 rounded-xl ${
+              item.type === 'video'
+                ? 'bg-red-50 text-red-500'
+                : 'bg-indigo-50 text-indigo-500'
+            }`}>
+              {item.type === 'video'
+                ? <i data-lucide="video"></i>
+                : <i data-lucide="file-text"></i>}
+            </div>
+
+            <div>
+              <h4 className="font-black text-lg">{item.title}</h4>
+              <p className="text-[10px] font-bold text-gray-400 uppercase">
+                {item.type}
+              </p>
+            </div>
+          </div>
+
+          <i data-lucide="chevron-left" className="text-gray-300"></i>
+        </button>
+
+      ))}
+
+  </div>
+)}
 
                                 {selectedItem && (
                                     <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden animate-in">
@@ -363,7 +1005,7 @@ React.useEffect(() => {
                                         )}
                                         <div className="p-10">
                                             <h2 className="text-3xl font-black text-gray-900">{selectedItem.title}</h2>
-                                            <p className="mt-4 text-gray-500 font-medium">تم رفع هذا المحتوى بواسطة قسم هندسة المساحة لخدمة الطلاب أكاديمياً.</p>
+                                            <p className="mt-4 text-gray-500 font-medium">{lang === 'ar' ? "المحتوى بواسطة قسم هندسة المساحة لخدمة الطلاب أكاديمياً" : "Content provided by the Geomatics Engineering Department for academic student support"}</p>
                                         </div>
                                     </div>
                                 )}
@@ -380,6 +1022,176 @@ React.useEffect(() => {
       <span className="font-bold text-sm">{toast.message}</span>
     </div>
   </div>
+)}
+{/* النافذة المنبثقة لإضافة المحاضرات */}
+{isModalOpen && modalSubjectData && (
+    /* السطر اللي تحت ده هو اللي بيقفل المودال لما تضغط في الفراغ */
+    <div 
+        onClick={(e) => {
+            if (e.target === e.currentTarget) setIsModalOpen(false);
+        }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+    >
+        {/* المربع الأبيض (محتوى المودال) - أضفنا stopPropagation عشان ما يقفلش لما تضغط جواه */}
+        <div 
+            onClick={(e) => e.stopPropagation()} 
+            className={`w-full max-w-md p-6 rounded-3xl shadow-2xl relative animate-in zoom-in-95 duration-200 ${darkMode ? 'bg-gray-900 border border-gray-700' : 'bg-white'}`}
+        >
+            
+            {/* زر الإغلاق (الـ X) */}
+            <button 
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors"
+            >
+                <i data-lucide="x" className="w-6 h-6"></i>
+            </button>
+
+            {/* باقي كود الفورم وعرض الدروس اللي إنت كاتبه يكمل هنا عادي... */}
+            <div className="mb-6">
+                <h2 className="text-2xl font-black text-orange-500 mb-1">
+                    {lang === 'ar' ? "إضافة محاضرة جديدة" : "Add New Lecture"}
+                </h2>
+                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    المادة المحددة: <strong className={darkMode ? 'text-white' : 'text-black'}>{modalSubjectData.subject}</strong>
+                </p>
+            </div>
+
+          <form onSubmit={async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    // تجهيز البيانات
+    const newLecture = {
+        title: formData.get('title'),
+        url: formData.get('url'),
+        type: formData.get('type'), // فيديو، pdf، exam، reference
+        category: 'academic',
+        subject: modalSubjectData.subject,
+        yearId: String(modalSubjectData.yearId),
+        semesterId: String(modalSubjectData.semesterId),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp() // توقيت عالمي
+    };
+
+    try {
+        // استخدام db المعرف عندك في السكريبت الأول
+        // تأكد أن اسم الكولكشن 'materials' مطابق للـ useEffect في سطر 116
+        await db.collection("materials").add(newLecture);
+
+        setToast({ 
+            show: true, 
+            message: lang === 'ar' ? "تمت إضافة المحاضرة بنجاح" : "Lecture added successfully" 
+        });
+        
+        setIsModalOpen(false);
+        e.target.reset();
+        
+        // إخفاء التوست بعد 3 ثواني
+        setTimeout(() => setToast({ show: false, message: '' }), 3000);
+
+    } catch (error) {
+        console.error("Firebase Error:", error);
+        alert(lang === 'ar' ? "فشل الحفظ: " + error.message : "Save failed: " + error.message);
+    }
+}} className="space-y-4">
+
+                
+                <div>
+                    <label className={`block text-sm font-bold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        عنوان المحاضرة (مثال: المحاضرة الأولى)
+                    </label>
+                    <input name="title" required type="text" className={`w-full p-3 rounded-xl border ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-200'}`} />
+                </div>
+
+                <div>
+                    <label className={`block text-sm font-bold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        رابط المحاضرة (درايف / يوتيوب)
+                    </label>
+                    <input name="url" required type="url" className={`w-full p-3 rounded-xl border ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-gray-50 border-gray-200'}`} />
+                </div>
+
+                <div>
+                    <label className={`block text-sm font-bold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                        نوع الملف
+                    </label>
+                   <select name="type" className={`w-full p-4 rounded-2xl border-2 outline-none ${darkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-100'}`}>
+    <option value="video">{lang === 'ar' ? "فيديو" : "Video"}</option>
+    <option value="pdf">{lang === 'ar' ? "ملف PDF" : "PDF File"}</option>
+    <option value="reference">{lang === 'ar' ? "مرجع خارجي" : "Reference"}</option>
+    <option value="exam">{lang === 'ar' ? "امتحان / Assignment" : "Exam"}</option>
+</select>
+                </div>
+
+                <button type="submit" className="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-black rounded-xl text-lg shadow-lg transition-all mt-4">
+                    حفظ المحاضرة
+                </button>
+
+            </form>
+            {/* بداية كود عرض الدروس والحذف والتعديل */}
+<div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
+    <h3 className={`text-lg font-black mb-4 ${darkMode ? 'text-orange-400' : 'text-gray-700'}`}>
+        {lang === 'ar' ? "الدروس المضافة حالياً:" : "Current Lectures:"}
+    </h3>
+    
+    <div className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+        {contents
+            .filter(c => 
+                c.subject === modalSubjectData.subject && 
+                String(c.yearId) === String(modalSubjectData.yearId) && 
+                String(c.semesterId) === String(modalSubjectData.semesterId)
+            )
+            .sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
+            .map((lecture, index) => (
+                <div key={lecture.id || index} className={`p-4 rounded-2xl flex justify-between items-center border transition-all ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-100 hover:bg-white hover:shadow-md'}`}>
+                    <div className="flex flex-col">
+                        <span className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-gray-800'}`}>{lecture.title}</span>
+                        <span className="text-[10px] text-orange-500 font-bold uppercase">{lecture.type}</span>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                              <button 
+                            onClick={() => handleEdit("materials", lecture.id, lecture.title, lecture.url)}
+                            className="p-2 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-colors"
+                            title="تعديل"
+                        >
+                            <i data-lucide="edit-3" className="w-4 h-4"></i>
+                            <span className="text-[10px] ml-1">تعديل</span>
+                        </button>
+                        
+                        {/* زر الحذف */}
+                        <button 
+                            onClick={() => handleDelete("materials", lecture.id)}
+                            className="p-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-colors"
+                            title="حذف"
+                        >
+                            <i data-lucide="trash-2" className="w-4 h-4"></i>
+                            <span className="text-[10px] ml-1">حذف</span>
+                        </button>
+
+                        {/* زر المعاينة */}
+                        <a 
+                            href={lecture.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="p-2 bg-gray-200 text-gray-600 rounded-xl hover:bg-gray-300 transition-colors"
+                        >
+                            <i data-lucide="external-link" className="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            ))
+        }
+
+        {/* رسالة في حال لا توجد دروس */}
+        {contents.filter(c => c.subject === modalSubjectData.subject).length === 0 && (
+            <p className="text-center py-4 text-gray-400 text-sm italic">
+                {lang === 'ar' ? "لا توجد دروس مضافة لهذه المادة بعد" : "No lectures added for this subject yet"}
+            </p>
+        )}
+    </div>
+</div>
+{/* نهاية الكود */}
+        </div>
+    </div>
 )}
                 </div>
             );
